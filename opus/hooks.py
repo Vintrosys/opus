@@ -43,7 +43,7 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Job Card" : "overrides/js/job_card.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -130,20 +130,13 @@ app_license = "mit"
 # Override standard doctype classes
 
 override_doctype_class = {
-	"Stock Entry": "opus.overrides.stock_entry.CustomSe"
+	"Stock Entry": "opus.overrides.py.stock_entry.CustomSe",
+    "Job Card": "opus.overrides.py.job_card.JC"
 }
 
 # Document Events
 # ---------------
 # Hook on document methods and events
-
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
 
 # Scheduled Tasks
 # ---------------
@@ -174,9 +167,9 @@ override_doctype_class = {
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "opus.event.get_events"
-# }
+override_whitelisted_methods = {
+	"erpnext.manufacturing.doctype.job_card.job_card.make_time_log": "opus.overrides.py.job_card.make_time_log"
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
