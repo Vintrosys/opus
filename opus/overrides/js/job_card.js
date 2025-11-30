@@ -1,6 +1,6 @@
 frappe.ui.form.on('Job Card', {
     refresh(frm) {
-        if (!frm.is_new() && frm.doc.docstatus ==0 && frm.doc.total_completed_qty <= frm.doc.for_quantity) {
+        if (!frm.is_new() && frm.doc.docstatus ==0 && frm.doc.total_completed_qty < frm.doc.for_quantity) {
             frm.add_custom_button("Transfer RM", () => {
                 frm.trigger("open_rm_selection_popup");
             });
@@ -24,7 +24,7 @@ frappe.ui.form.on('Job Card', {
             // Build fields for dialog
             let fields = items.map((d, i) => ({
                 fieldname: "item_" + i,
-                label: `${d.item_code} (Qty: ${d.qty})`,
+                label: `${d.item_code} (Qty: ${d.allowed_qty})`,
                 fieldtype: "Float",
                 default: 0,
                 reqd: 0
@@ -42,6 +42,7 @@ frappe.ui.form.on('Job Card', {
                         if (entered_qty && entered_qty > 0) {
                             selected.push({
                                 item_code: row.item_code,
+                                allowed_qty: row.allowed_qty,
                                 qty: entered_qty,
                                 uom: row.uom,
                                 stock_uom: row.stock_uom,

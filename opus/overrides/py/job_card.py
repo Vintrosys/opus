@@ -3,6 +3,8 @@ import frappe
 from frappe.utils import flt,cint
 from erpnext.manufacturing.doctype.work_order.work_order import make_stock_entry
 import json
+from frappe import _
+from erpnext.accounts.doctype.pos_invoice.pos_invoice import get_stock_availability
 
 class JC(JobCard):
     def on_update(self):
@@ -95,35 +97,30 @@ def make_time_log(args):
 
 @frappe.whitelist()
 def get_mtfm_items(work_order):
-    mtfm = frappe.get_list(
-        "Stock Entry",
-        filters={
-            "work_order": work_order,
-            "stock_entry_type": "Material Transfer for Manufacture",
-            "docstatus": ["!=", 2]
-        },
-        order_by="creation desc",
-        limit=1
-    )
-
-    if not mtfm:
-        return []
-
-    doc = frappe.get_doc("Stock Entry", mtfm[0].name)
-
+    wo = frappe.get_doc("Work Order", work_order)
     items = []
-    for row in doc.items:
-        if not row.is_finished_item:  # only RM
-            items.append({
-                "item_code": row.item_code,
-                "qty": row.qty,
-                "uom": row.uom,
-                "stock_uom": row.stock_uom,
-                "conversion_factor": row.conversion_factor,
-                "s_warehouse": row.t_warehouse or doc.to_warehouse,
-                "t_warehouse": row.s_warehouse,
-                "serial_and_batch_bundle": row.serial_and_batch_bundle
-            })
+    for row in wo.required_items:
+        if row.transferred_qty and row.consumed_qty < row.transferred_qty:
+            stock_status = get_stock_availability(row.item_code, wo.wip_warehouse)
+            unconsumed_qty = row.transferred_qty - row.consumed_qty
+            if stock_status[0] >= unconsumed_qty:
+                items.append({
+                    "item_code": row.item_code,
+                    "allowed_qty": unconsumed_qty,
+                    "s_warehouse": wo.wip_warehouse,
+                    "t_warehouse": row.source_warehouse,
+                    "uom": row.stock_uom,
+                    "stock_uom": row.stock_uom,
+                })
+            else:
+                items.append({
+                    "item_code": row.item_code,
+                    "allowed_qty": stock_status[0],
+                    "s_warehouse": wo.wip_warehouse,
+                    "t_warehouse": row.source_warehouse,
+                    "uom": row.stock_uom,
+                    "stock_uom": row.stock_uom,
+                })
 
     return items
 
@@ -137,15 +134,15 @@ def create_material_transfer(work_order, items):
     new_se.work_order = work_order
     new_se.posting_date = frappe.utils.today()
 
-    print(items)
-
     for row in items:
+        if row['qty'] > row['allowed_qty']:
+            frappe.throw(_(f"Excess Qty not allowed for {row['item_code']}"))
+            return
         new_se.append("items", {
             "item_code": row["item_code"],
             "qty": row["qty"],
             "uom": row["uom"],
             "stock_uom": row["stock_uom"],
-            "conversion_factor": row["conversion_factor"],
             "s_warehouse": row["s_warehouse"],
             "t_warehouse": row["t_warehouse"]
         })
