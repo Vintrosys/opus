@@ -133,7 +133,7 @@ def create_material_transfer(work_order, items, job_card ):
     new_se.company = frappe.db.get_value("Work Order", work_order, "company")
     new_se.work_order = work_order
     new_se.posting_date = frappe.utils.today()
-    new_se.job_card = job_card
+    new_se.custom_rm_job_card = job_card
 
     for row in items:
         if row['qty'] > row['allowed_qty']:
