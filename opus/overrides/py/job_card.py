@@ -125,7 +125,7 @@ def get_mtfm_items(work_order):
     return items
 
 @frappe.whitelist()
-def create_material_transfer(work_order, items):
+def create_material_transfer(work_order, items, job_card ):
     items = frappe.parse_json(items)
 
     new_se = frappe.new_doc("Stock Entry")
@@ -133,6 +133,7 @@ def create_material_transfer(work_order, items):
     new_se.company = frappe.db.get_value("Work Order", work_order, "company")
     new_se.work_order = work_order
     new_se.posting_date = frappe.utils.today()
+    new_se.job_card = job_card
 
     for row in items:
         if row['qty'] > row['allowed_qty']:

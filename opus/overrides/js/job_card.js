@@ -64,7 +64,8 @@ frappe.ui.form.on('Job Card', {
                         method: "opus.overrides.py.job_card.create_material_transfer",
                         args: {
                             work_order: frm.doc.work_order,
-                            items: selected
+                            items: selected,
+                            job_card: frm.doc.name
                         },
                         freeze: true,
                         freeze_message: "Creating Material Transfer..."
