@@ -1,10 +1,14 @@
 from erpnext.manufacturing.doctype.job_card.job_card import JobCard
 import frappe
-from frappe.utils import flt,cint
+from frappe.utils import flt,cint, get_link_to_form
 from erpnext.manufacturing.doctype.work_order.work_order import make_stock_entry
 import json
 from frappe import _
 from erpnext.accounts.doctype.pos_invoice.pos_invoice import get_stock_availability
+from frappe import _, bold
+
+class OperationSequenceError(frappe.ValidationError):
+	pass
 
 class JC(JobCard):
     def on_update(self):
@@ -26,6 +30,13 @@ class JC(JobCard):
         self.update_sub_operation_status()
         self.validate_work_order()
         self.update_work_order()
+    def on_submit(self):
+        self.validate_transfer_qty()
+        self.validate_job_card()
+        self.update_work_order()
+        self.set_transferred_qty()
+        if self.for_quantity != self.total_completed_qty:
+            frappe.throw(_("Kindly Complete Planned Qty and Submit"))          
     
     def get_current_operation_data(self):
         return frappe.get_all(
@@ -43,6 +54,8 @@ class JC(JobCard):
             },
         )
     
+    def validate_sequence_id(self):
+       return
     def update_work_order(self):
         if not self.work_order:
             return
@@ -81,7 +94,10 @@ def make_time_log(args):
     doc = frappe.get_doc("Job Card", args.job_card_id)
     doc.validate_sequence_id()
     doc.add_time_log(args)
-    if args.completed_qty:
+    wo = frappe.get_doc("Work Order",doc.work_order)
+    if args.completed_qty and doc.sequence_id == len(wo.operations):
+        if wo.operations[-2].completed_qty != args.completed_qty:
+            frappe.throw(_("Kindly Complete Previous Operations Qty before Completing Finished Good Qty"))
         se_dict =  make_stock_entry(doc.work_order,"Manufacture",args.completed_qty)
 
         se = frappe.get_doc(se_dict)
