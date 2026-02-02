@@ -5,6 +5,10 @@ from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
 
 class CustomSe(StockEntry):
     def validate_work_order(self):
+        if self.purpose == "Manufacture" and self.work_order:
+            jc = frappe.get_list("Job Card", filters={"work_order": self.work_order, "status":"Open"})
+            if jc:
+                frappe.throw(_("Please complete the Job card before completing Manufacture Stock entry."))
         if self.purpose in (
             "Manufacture",
             "Material Transfer for Manufacture",
