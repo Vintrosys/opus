@@ -98,7 +98,7 @@ def make_time_log(args):
     if args.completed_qty and doc.sequence_id == len(wo.operations):
         current_qty = doc.total_completed_qty
         if wo.operations[-2].completed_qty < current_qty:
-            frappe.throw(_("Kindly Complete Previous Operations Qty before Completing Finished Good Qty"))
+            frappe.throw(_("Excess Production not allowed.Kindly Complete Previous Operations Qty before Completing Finished Good Qty"))
         se_dict =  make_stock_entry(doc.work_order,"Manufacture",args.completed_qty)
 
         se = frappe.get_doc(se_dict)
@@ -111,6 +111,11 @@ def make_time_log(args):
         title="Success",
         indicator="green"
         )
+    else:
+        if doc.sequence_id >1:
+            prev_op = wo.operations[doc.sequence_id -2]
+            if prev_op.completed_qty < doc.total_completed_qty:
+                frappe.throw(_("Excess Production not allowed.Kindly Complete Previous Operations Qty before Completing this Operation Qty"))
 
 @frappe.whitelist()
 def get_mtfm_items(work_order):
