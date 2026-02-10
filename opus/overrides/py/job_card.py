@@ -97,7 +97,7 @@ def make_time_log(args):
     wo = frappe.get_doc("Work Order",doc.work_order)
     if args.completed_qty and doc.sequence_id == len(wo.operations):
         current_qty = doc.total_completed_qty
-        if wo.operations[-2].completed_qty < current_qty:
+        if len(wo.operations) !=1 and wo.operations[-2].completed_qty < current_qty:
             frappe.throw(_("Excess Production not allowed.Kindly Complete Previous Operations Qty before Completing Finished Good Qty"))
         se_dict =  make_stock_entry(doc.work_order,"Manufacture",args.completed_qty)
 
