@@ -5,6 +5,44 @@ app_description = "OPUS Customization"
 app_email = "admin@vintrosys.com"
 app_license = "mit"
 
+fixtures = [
+
+    # Client Scripts for Sales Invoice
+    {
+        "dt": "Client Script",
+        "filters": [
+            ["dt", "=", "Sales Invoice"],
+            ["module", "=", "Opus"]
+        ]
+    },
+
+    # Server Scripts for Stock Entry
+    {
+        "dt": "Server Script",
+        "filters": [
+            ["dt", "=", "Stock Entry"],
+            ["module", "=", "Opus"]
+        ]
+    },
+
+    # Print Formats for Sales Invoice
+    {
+        "dt": "Print Format",
+        "filters": [
+            ["doc_type", "=", "Sales Invoice"],
+            ["module", "=", "Opus"]
+        ]
+    }
+
+]
+
+
+
+
+
+
+
+
 # Apps
 # ------------------
 
