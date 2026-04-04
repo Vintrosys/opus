@@ -1,0 +1,21 @@
+[
+ {
+  "allow_guest": 0,
+  "api_method": null,
+  "cron_format": null,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Server Script",
+  "doctype_event": "After Submit",
+  "enable_rate_limit": 0,
+  "event_frequency": "All",
+  "modified": "2026-04-02 13:40:57.805086",
+  "module": "Opus",
+  "name": "JOB Card Operation Notification",
+  "rate_limit_count": 5,
+  "rate_limit_seconds": 86400,
+  "reference_doctype": "Stock Entry",
+  "script": "# Trigger only for correct type\r\nif doc.stock_entry_type == \"Material Transfer for Manufacture\" and doc.work_order:\r\n\r\n    job_cards = frappe.get_all(\r\n        \"Job Card\",\r\n        filters={\"work_order\": doc.work_order, \"docstatus\": 0},\r\n        fields=[\"name\", \"operation\"]\r\n    )\r\n\r\n    operation_user_map = {\r\n        \"adhesive coating\": [\"purushothaman@yopmail.com\"],\r\n        \"rewinding\": [\"balaji@yopmail.com\"],\r\n        \"slitting\": [\"muneeswaran@yopmail.com\"],\r\n        \"perforation\": [\"prabhu@yopmail.com\"],\r\n        \"printing\": [\"muthu@yopmail.com\"]\r\n    }\r\n\r\n    for jc in job_cards:\r\n        operation = jc.operation.strip().lower()\r\n        users = operation_user_map.get(operation)\r\n\r\n        if users:\r\n            for user in users:\r\n                frappe.get_doc({\r\n                    \"doctype\": \"Notification Log\",\r\n                    \"document_type\": \"Job Card\",\r\n                    \"document_name\": jc.name,\r\n                    \"subject\": f\"Material Ready for {jc.operation}\",\r\n                    \"email_content\": f\"\"\"\r\n                    Work Order: {doc.work_order}<br>\r\n                    Job Card: {jc.name}<br>\r\n                    Operation: {jc.operation}<br><br>\r\n                    Material is ready. You can start the operation.\r\n                    \"\"\",\r\n                    \"for_user\": user,\r\n                    \"type\": \"Alert\"\r\n                }).insert(ignore_permissions=True)",
+  "script_type": "DocType Event"
+ }
+]

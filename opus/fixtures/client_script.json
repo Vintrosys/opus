@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2026-04-02 13:42:23.150015",
+  "module": "Opus",
+  "name": "Meter Conversion SI",
+  "script": "frappe.ui.form.on('Sales Invoice Item', {\r\n    form_render(frm, cdt, cdn) {\r\n        set_display_uom_si(frm, cdt, cdn);\r\n    },\r\n\r\n    item_code(frm, cdt, cdn) {\r\n        set_display_uom_si(frm, cdt, cdn);\r\n    },\r\n\r\n    uom(frm, cdt, cdn) {\r\n        set_display_uom_si(frm, cdt, cdn);\r\n    }\r\n});\r\n\r\nfunction set_display_uom_si(frm, cdt, cdn) {\r\n    let row = locals[cdt][cdn];\r\n\r\n    if (!row.uom) return;\r\n\r\n    let display = row.uom.startsWith(\"Meter\") ? \"Meter\" : row.uom;\r\n\r\n    frappe.model.set_value(cdt, cdn, \"display_uom\", display);\r\n}",
+  "view": "Form"
+ }
+]

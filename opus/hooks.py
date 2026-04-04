@@ -6,7 +6,7 @@ app_email = "admin@vintrosys.com"
 app_license = "mit"
 
 fixtures = [
-
+ 
     # Client Scripts for Sales Invoice
     {
         "dt": "Client Script",
@@ -15,16 +15,16 @@ fixtures = [
             ["module", "=", "Opus"]
         ]
     },
-
+ 
     # Server Scripts for Stock Entry
     {
-        "dt": "Server Script",
+        "doctype": "Server Script",
         "filters": [
-            ["dt", "=", "Stock Entry"],
+            ["reference_doctype", "=", "Stock Entry"],
             ["module", "=", "Opus"]
         ]
     },
-
+ 
     # Print Formats for Sales Invoice
     {
         "dt": "Print Format",
@@ -33,7 +33,6 @@ fixtures = [
             ["module", "=", "Opus"]
         ]
     }
-
 ]
 
 
