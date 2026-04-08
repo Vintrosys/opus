@@ -6,30 +6,56 @@ app_email = "admin@vintrosys.com"
 app_license = "mit"
 
 fixtures = [
- 
-    # Client Scripts for Sales Invoice
+
+    # Client Scripts
     {
         "dt": "Client Script",
         "filters": [
-            ["dt", "=", "Sales Invoice"],
+            ["dt", "in", [
+                "Sales Invoice",
+                "BOM",
+                "Work Order",
+                "Stock Entry",
+                "Sales Order",
+                "Sales Person",
+                "Coating Machine Production Record",
+                "Batch",
+                "Production Plan",
+                "Purchase Invoice"
+            ]],
             ["module", "=", "Opus"]
         ]
     },
- 
-    # Server Scripts for Stock Entry
+
+    # Server Scripts
     {
-        "doctype": "Server Script",
+        "dt": "Server Script",
         "filters": [
-            ["reference_doctype", "=", "Stock Entry"],
+            ["reference_doctype", "in", [
+                "Stock Entry",
+                "BOM",
+                "Work Order",
+                "Sales Order",
+                "Coating Machine Production Record",
+                "Job Card",
+                "Material Request",
+                "Employee Checkin",
+                "Production Plan"
+            ]],
             ["module", "=", "Opus"]
         ]
     },
- 
-    # Print Formats for Sales Invoice
+
+    # Print Formats
     {
         "dt": "Print Format",
         "filters": [
-            ["doc_type", "=", "Sales Invoice"],
+            ["doc_type", "in", [
+                "Sales Invoice",
+                "Payment Entry",
+                "Quality Inspection",
+                "Purchase Order"
+            ]],
             ["module", "=", "Opus"]
         ]
     }
