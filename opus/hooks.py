@@ -8,7 +8,7 @@ app_license = "mit"
 fixtures = [
     {"dt": "Client Script"},
     {"dt": "Server Script"},
-    {"dt": "Print Format"}
+    {"dt": "Print Format"}    
 ]
 
 
