@@ -1,0 +1,252 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "JPIN-RMP-.####",
+ "creation": "2025-11-07 16:04:41.491480",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "coating_machine_production_record_section",
+  "work_order",
+  "article_no",
+  "colour",
+  "fg_lot_no",
+  "master_roll_width",
+  "master_roll_meter",
+  "standard_winding_meter",
+  "actual_meter_winded",
+  "req_no_of_log_rolls",
+  "buffer_stock",
+  "total_log_rolls_winded",
+  "rewinded_accepted",
+  "column_break_fkng",
+  "rewinded_rejected",
+  "waste_meter",
+  "remark_waste",
+  "balance_meters_in_master_roll",
+  "return_qty_in_stores",
+  "master_roll",
+  "column_break_hq7o",
+  "date",
+  "log_roll",
+  "inpection_waste_removal",
+  "unwind_station",
+  "winding_station",
+  "machine_start",
+  "machine_end",
+  "setting_process",
+  "operator_name",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "coating_machine_production_record_section",
+   "fieldtype": "Section Break",
+   "label": "COATING MACHINE PRODUCTION RECORD"
+  },
+  {
+   "fieldname": "work_order",
+   "fieldtype": "Link",
+   "label": "Work Order",
+   "options": "Work Order",
+   "read_only": 1
+  },
+  {
+   "fieldname": "article_no",
+   "fieldtype": "Data",
+   "label": "Article No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "colour",
+   "fieldtype": "Data",
+   "label": "Colour",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fg_lot_no",
+   "fieldtype": "Data",
+   "label": "FG Lot No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "master_roll_width",
+   "fieldtype": "Float",
+   "label": "Master Roll Width"
+  },
+  {
+   "fieldname": "master_roll_meter",
+   "fieldtype": "Float",
+   "label": "Master Roll Meter as per CD"
+  },
+  {
+   "fieldname": "standard_winding_meter",
+   "fieldtype": "Select",
+   "label": "Standard Winding Meter",
+   "options": "\n25\n40\n50\n55\n100"
+  },
+  {
+   "fieldname": "actual_meter_winded",
+   "fieldtype": "Float",
+   "label": "Actual Meter Winded"
+  },
+  {
+   "fieldname": "req_no_of_log_rolls",
+   "fieldtype": "Float",
+   "label": "Req No of Log Rolls"
+  },
+  {
+   "fieldname": "buffer_stock",
+   "fieldtype": "Float",
+   "label": "Buffer Stock"
+  },
+  {
+   "fieldname": "total_log_rolls_winded",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Log Rolls Winded"
+  },
+  {
+   "fieldname": "rewinded_accepted",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "After Re-winded No of Rolls Accepted"
+  },
+  {
+   "fieldname": "column_break_fkng",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rewinded_rejected",
+   "fieldtype": "Float",
+   "label": "After Re-winded No of Rolls Rejected"
+  },
+  {
+   "fieldname": "waste_meter",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Waste in Meter"
+  },
+  {
+   "fieldname": "remark_waste",
+   "fieldtype": "Data",
+   "label": "Remark for Waste"
+  },
+  {
+   "fieldname": "balance_meters_in_master_roll",
+   "fieldtype": "Float",
+   "label": "Balance Meters in Master Roll"
+  },
+  {
+   "fieldname": "return_qty_in_stores",
+   "fieldtype": "Float",
+   "label": "Return Qty in Stores"
+  },
+  {
+   "fieldname": "master_roll",
+   "fieldtype": "Float",
+   "label": "Master Roll"
+  },
+  {
+   "fieldname": "column_break_hq7o",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "log_roll",
+   "fieldtype": "Float",
+   "label": "Log Roll"
+  },
+  {
+   "fieldname": "inpection_waste_removal",
+   "fieldtype": "Data",
+   "label": "Inspection for Waste Removal"
+  },
+  {
+   "fieldname": "unwind_station",
+   "fieldtype": "Float",
+   "label": "Unwind Station"
+  },
+  {
+   "fieldname": "winding_station",
+   "fieldtype": "Float",
+   "label": "Winding Station"
+  },
+  {
+   "fieldname": "machine_start",
+   "fieldtype": "Time",
+   "label": "Machine Start"
+  },
+  {
+   "fieldname": "machine_end",
+   "fieldtype": "Time",
+   "label": "Machine End"
+  },
+  {
+   "fieldname": "setting_process",
+   "fieldtype": "Data",
+   "label": "Setting Process"
+  },
+  {
+   "fieldname": "operator_name",
+   "fieldtype": "Data",
+   "label": "Name of the Operator"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Long Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Rewinding Machine Production Record",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-17 17:02:43.410185",
+ "modified_by": "Administrator",
+ "module": "Opus",
+ "name": "Rewinding Machine Production Record",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

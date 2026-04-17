@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-10-06 10:58:55.730187",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cloth_lot_details_column",
+  "cloth_batch",
+  "qty_meter",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "cloth_lot_details_column",
+   "fieldtype": "Column Break",
+   "label": "Cloth Lot Details"
+  },
+  {
+   "fieldname": "cloth_batch",
+   "fieldtype": "Link",
+   "label": "Cloth Batch",
+   "options": "Batch"
+  },
+  {
+   "fieldname": "qty_meter",
+   "fieldtype": "Float",
+   "label": "Qty (Meter)"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-04-17 17:14:13.511482",
+ "modified_by": "Administrator",
+ "module": "Opus",
+ "name": "CMPR Cloth Lot Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
