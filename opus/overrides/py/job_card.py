@@ -22,9 +22,6 @@ class JC(JobCard):
         self.validate_work_order()
         self.update_work_order()
     def validate(self):
-        if self.total_completed_qty > self.for_quantity:
-            self.for_quantity = self.total_completed_qty
-
         self.validate_time_logs()
         self.set_status()
         self.validate_operation_id()
@@ -34,13 +31,11 @@ class JC(JobCard):
         self.validate_work_order()
         self.update_work_order()
     def on_submit(self):
-        if self.total_completed_qty > self.for_quantity:
-            self.for_quantity = self.total_completed_qty
         self.validate_transfer_qty()
         self.validate_job_card()
         self.update_work_order()
         self.set_transferred_qty()
-        if self.for_quantity > self.total_completed_qty:
+        if self.for_quantity != self.total_completed_qty:
             frappe.throw(_("Kindly Complete Planned Qty and Submit"))          
     
     def get_current_operation_data(self):
@@ -185,3 +180,11 @@ def create_material_transfer(work_order, items, job_card ):
     title="Success",
     indicator="green"
     )
+
+@frappe.whitelist()
+def force_submit_job_card(job_card):
+    doc = frappe.get_doc("Job Card", job_card)
+    doc.for_quantity = doc.total_completed_qty
+    doc.save(ignore_permissions=True)
+    doc.submit()
+    return "Success"
