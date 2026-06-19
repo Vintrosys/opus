@@ -140,7 +140,8 @@ doctype_js = {"Job Card" : "overrides/js/job_card.js"}
 
 override_doctype_class = {
 	"Stock Entry": "opus.overrides.py.stock_entry.CustomSe",
-    "Job Card": "opus.overrides.py.job_card.JC"
+    "Job Card": "opus.overrides.py.job_card.JC",
+    "Work Order": "opus.overrides.py.work_order.CustomWO"
 }
 
 # Document Events
