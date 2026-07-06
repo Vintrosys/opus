@@ -6,6 +6,7 @@ app_email = "admin@vintrosys.com"
 app_license = "mit"
 
 fixtures = [
+    {"dt": "Custom Field"},
     {"dt": "Client Script"},
     {"dt": "Server Script"},
     {"dt": "Print Format"}    
