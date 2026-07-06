@@ -1,0 +1,167 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-06-27 16:10:12.290844",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "job_card",
+  "manufacturing_stock_entry",
+  "work_order",
+  "operation",
+  "item_code",
+  "required_width",
+  "reviewed_by",
+  "column_break_owan",
+  "inspection_date",
+  "machine_no",
+  "operator_name",
+  "checked_by",
+  "satisfactory",
+  "remarks",
+  "section_break_yq7e",
+  "observed_widths",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "MAT-IPI-.YYYY.-"
+  },
+  {
+   "fieldname": "job_card",
+   "fieldtype": "Link",
+   "label": "Job Card",
+   "options": "Job Card"
+  },
+  {
+   "fieldname": "manufacturing_stock_entry",
+   "fieldtype": "Link",
+   "label": "Manufacturing Stock Entry",
+   "options": "Stock Entry"
+  },
+  {
+   "fetch_from": "job_card.work_order",
+   "fieldname": "work_order",
+   "fieldtype": "Link",
+   "label": "Work Order",
+   "options": "Work Order"
+  },
+  {
+   "fetch_from": "job_card.operation_id",
+   "fieldname": "operation",
+   "fieldtype": "Data",
+   "label": "Operation"
+  },
+  {
+   "fetch_from": "job_card.item_name",
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Article No",
+   "options": "Item"
+  },
+  {
+   "fieldname": "required_width",
+   "fieldtype": "Float",
+   "label": "Required Width"
+  },
+  {
+   "fieldname": "reviewed_by",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_owan",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "job_card.posting_date",
+   "fieldname": "inspection_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "machine_no",
+   "fieldtype": "Data",
+   "label": "Machine No"
+  },
+  {
+   "fieldname": "operator_name",
+   "fieldtype": "Link",
+   "label": "Operator Name",
+   "options": "User"
+  },
+  {
+   "fieldname": "checked_by",
+   "fieldtype": "Link",
+   "label": "Checked By",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "satisfactory",
+   "fieldtype": "Select",
+   "label": "Satisfactory ",
+   "options": "\nOK\nNOT OK"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "section_break_yq7e",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "observed_widths",
+   "fieldtype": "Table",
+   "label": "Observed Widths",
+   "options": "Observed Width Reading"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "In Process Inspection Report",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-07-04 18:27:17.197136",
+ "modified_by": "Administrator",
+ "module": "Opus",
+ "name": "In Process Inspection Report",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
