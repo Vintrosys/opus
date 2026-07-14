@@ -1,0 +1,83 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-07-01 14:42:22.498441",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_j16t",
+  "incoming_document_no",
+  "incoming_revision_no",
+  "incoming_revision_date",
+  "column_break_0cdn",
+  "outgoing_document_no",
+  "outgoing_revision_no",
+  "outgoing_revision_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_j16t",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "incoming_document_no",
+   "fieldtype": "Data",
+   "label": "Incoming Document no"
+  },
+  {
+   "fieldname": "incoming_revision_no",
+   "fieldtype": "Data",
+   "label": "Incoming Revision No"
+  },
+  {
+   "fieldname": "incoming_revision_date",
+   "fieldtype": "Date",
+   "label": "Incoming Revision Date"
+  },
+  {
+   "fieldname": "column_break_0cdn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "outgoing_document_no",
+   "fieldtype": "Data",
+   "label": "Outgoing Document no"
+  },
+  {
+   "fieldname": "outgoing_revision_no",
+   "fieldtype": "Data",
+   "label": "Outgoing Revision No"
+  },
+  {
+   "fieldname": "outgoing_revision_date",
+   "fieldtype": "Date",
+   "label": "Outgoing Revision Date"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-07-09 15:41:46.178124",
+ "modified_by": "Administrator",
+ "module": "Opus",
+ "name": "QC Report Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
